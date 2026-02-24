@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heramb S. Patkar | Finance &amp; Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #CFB991;
+            --gold-dark: #8E6F3E;
+            --ink: #1a1a1a;
+            --ink-soft: #555;
+            --ink-muted: #888;
+            --bg: #fafaf9;
+            --card-bg: #ffffff;
+            --border: #e8e5e2;
+            --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.7rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        nav .brand {
+            font-size: 0.75rem; font-weight: 700; color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+        nav .brand span { color: var(--gold-dark); }
+        nav .links { display: flex; gap: 1.5rem; }
+        nav .links a {
+            font-size: 0.7rem; font-weight: 500; color: var(--ink-soft);
+            text-decoration: none; letter-spacing: 0.02em;
+            transition: color 0.15s;
+        }
+        nav .links a:hover { color: var(--gold-dark); }
+
+        /* ── Hero ── */
+        .hero {
+            margin-top: 52px;
+            padding: 4rem 2rem 3rem;
+            max-width: 960px; margin-left: auto; margin-right: auto;
+            display: flex; align-items: center; gap: 3rem;
+        }
+        .hero-photo {
+            flex-shrink: 0; width: 180px; height: 180px;
+            border-radius: 8px; overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-text { flex: 1; }
+        .hero-overline {
+            font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.18em; color: var(--gold-dark); margin-bottom: 0.4rem;
+        }
+        .hero-text h1 {
+            font-size: 2.2rem; font-weight: 800; letter-spacing: -0.025em;
+            line-height: 1.1; margin-bottom: 0.3rem;
+        }
+        .hero-subtitle {
+            font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.6rem; font-weight: 500;
+        }
+        .hero-tagline {
+            font-size: 0.82rem; color: var(--ink-muted); line-height: 1.7;
+            margin-bottom: 1rem; max-width: 520px;
+        }
+        .hero-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .hero-links a {
+            font-size: 0.68rem; font-weight: 600; color: var(--gold-dark);
+            text-decoration: none; padding: 0.3rem 0.9rem;
+            border: 1px solid rgba(142,111,62,0.3); border-radius: 4px;
+            transition: all 0.15s; letter-spacing: 0.02em;
+        }
+        .hero-links a:hover {
+            background: rgba(207,185,145,0.1); border-color: var(--gold-dark);
+        }
+        .hero-links a.primary {
+            background: var(--ink); color: #fff; border-color: var(--ink);
+        }
+        .hero-links a.primary:hover { background: #333; }
+
+        /* ── Section ── */
+        section { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
+        .section-label {
+            font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.18em; color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+        section h2 {
+            font-size: 1.3rem; font-weight: 700; margin-bottom: 1.2rem;
+            letter-spacing: -0.015em;
+        }
+        .divider {
+            border: none; border-top: 1px solid var(--border);
+            max-width: 960px; margin: 0 auto;
+        }
+
+        /* ── Featured Project ── */
+        .project-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 10px; padding: 1.8rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        }
+        .project-header {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .project-header h3 {
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem;
+        }
+        .project-header .badge {
+            font-size: 0.55rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--gold-dark);
+            background: rgba(207,185,145,0.12); padding: 0.2rem 0.6rem;
+            border-radius: 3px; white-space: nowrap;
+        }
+        .project-desc {
+            font-size: 0.82rem; color: var(--ink-soft); line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .project-stats {
+            display: flex; gap: 2rem; margin-bottom: 1.2rem;
+            padding: 0.8rem 0; border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .project-stats .stat { text-align: center; }
+        .project-stats .stat-num {
+            font-size: 1.2rem; font-weight: 700; color: var(--gold-dark);
+            font-family: var(--mono);
+        }
+        .project-stats .stat-label {
+            font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--ink-muted); margin-top: 2px;
+        }
+        .project-tech {
+            display: flex; gap: 0.4rem; flex-wrap: wrap;
+        }
+        .project-tech span {
+            font-size: 0.6rem; font-weight: 600; padding: 0.2rem 0.6rem;
+            border-radius: 3px; background: #f5f4f2; color: var(--ink-soft);
+            border: 1px solid var(--border);
+        }
+
+        /* ── Experience ── */
+        .exp-grid { display: flex; flex-direction: column; gap: 0.8rem; }
+        .exp-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 8px; padding: 1.2rem 1.4rem;
+            border-left: 3px solid transparent;
+            transition: border-color 0.15s;
+        }
+        .exp-card:hover { border-left-color: var(--gold); }
+        .exp-card .role { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.1rem; }
+        .exp-card .org { font-size: 0.78rem; font-weight: 600; color: var(--gold-dark); margin-bottom: 0.1rem; }
+        .exp-card .meta { font-size: 0.68rem; color: var(--ink-muted); margin-bottom: 0.3rem; }
+        .exp-card .desc { font-size: 0.75rem; color: var(--ink-soft); line-height: 1.65; }
+
+        /* ── Education + Certs grid ── */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .info-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 8px; padding: 1.2rem 1.4rem;
+        }
+        .info-card .card-title {
+            font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.14em; color: var(--gold-dark);
+            margin-bottom: 0.6rem; padding-bottom: 0.3rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .info-card .item { padding: 0.4rem 0; }
+        .info-card .item-title { font-size: 0.82rem; font-weight: 700; }
+        .info-card .item-sub { font-size: 0.72rem; color: var(--ink-soft); }
+        .info-card .item-meta { font-size: 0.65rem; color: var(--ink-muted); }
+
+        /* ── Footer ── */
+        footer {
+            max-width: 960px; margin: 2rem auto 0; padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        footer .copy { font-size: 0.62rem; color: var(--ink-muted); }
+        footer .foot-links { display: flex; gap: 1rem; }
+        footer .foot-links a {
+            font-size: 0.62rem; color: var(--ink-muted); text-decoration: none;
+            transition: color 0.15s;
+        }
+        footer .foot-links a:hover { color: var(--gold-dark); }
+
+        /* ── Responsive ── */
+        @media (max-width: 680px) {
+            .hero { flex-direction: column; text-align: center; gap: 1.5rem; padding-top: 3rem; }
+            .hero-tagline { max-width: 100%; }
+            .hero-links { justify-content: center; }
+            .two-col { grid-template-columns: 1fr; }
+            .project-stats { flex-wrap: wrap; gap: 1rem; }
+            footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+    <div class="brand">Heramb <span>Patkar</span></div>
+    <div class="links">
+        <a href="#about">About</a>
+        <a href="#project">Project</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero" id="about">
+    <div class="hero-photo">
+        <img src="photo.jpeg" alt="Heramb S. Patkar">
+    </div>
+    <div class="hero-text">
+        <p class="hero-overline">Finance &amp; Analytics</p>
+        <h1>Heramb S. Patkar</h1>
+        <p class="hero-subtitle">MSF Candidate &middot; Purdue Daniels School of Business</p>
+        <p class="hero-tagline">BITS Pilani engineering graduate and NISM XV certified research analyst
+        with equity research experience spanning Indian and U.S. capital markets.
+        Published researcher in biomedical device design.</p>
+        <div class="hero-links">
+            <a href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/HPATKAR" target="_blank">GitHub</a>
+            <a href="https://www.ias.ac.in/article/fulltext/boms/048/0028" target="_blank">Publication</a>
+            <a href="mailto:hpatkar@purdue.edu">Contact</a>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- Featured Project -->
+<section id="project">
+    <p class="section-label">Featured Project</p>
+    <h2>JGB Repricing Framework</h2>
+    <div class="project-card">
+        <div class="project-header">
+            <div>
+                <h3>Quantitative Regime Detection &amp; Trade Idea Generation</h3>
+                <p style="font-size:0.7rem;color:#888;margin-top:0.15rem;">MGMT 69000-119 &middot; Prof. Cinder Zhang &middot; Purdue University</p>
+            </div>
+            <span class="badge">Course Project</span>
+        </div>
+        <p class="project-desc">
+            An institutional-grade dashboard that detects regime shifts in Japanese Government Bond
+            markets using ensemble ML methods (Hidden Markov, GARCH, entropy, structural breaks)
+            and generates actionable trade ideas across 6 tenors. Features cross-asset spillover
+            analysis, yield curve decomposition via PCA and Nelson-Siegel, intraday FX event studies,
+            and profile-tailored PDF report generation.
+        </p>
+        <div class="project-stats">
+            <div class="stat"><div class="stat-num">4</div><div class="stat-label">Regime Models</div></div>
+            <div class="stat"><div class="stat-num">6</div><div class="stat-label">Tenors</div></div>
+            <div class="stat"><div class="stat-num">12</div><div class="stat-label">Dashboard Pages</div></div>
+            <div class="stat"><div class="stat-num">5</div><div class="stat-label">Analytical Layers</div></div>
+            <div class="stat"><div class="stat-num">54</div><div class="stat-label">Unit Tests</div></div>
+        </div>
+        <div class="project-tech">
+            <span>Python</span>
+            <span>Streamlit</span>
+            <span>Plotly</span>
+            <span>scikit-learn</span>
+            <span>statsmodels</span>
+            <span>HMM</span>
+            <span>GARCH</span>
+            <span>PCA</span>
+            <span>Nelson-Siegel</span>
+            <span>yfinance</span>
+            <span>FRED API</span>
+            <span>fpdf2</span>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- Experience -->
+<section id="experience">
+    <p class="section-label">Experience</p>
+    <h2>Professional Background</h2>
+    <div class="exp-grid">
+        <div class="exp-card">
+            <p class="role">Practicum Analyst</p>
+            <p class="org">Fino Advisors LLC</p>
+            <p class="meta">Jan 2026 &ndash; Present &middot; Houston, TX (Remote)</p>
+            <p class="desc">Build and update a Series A financial model with revenue assumptions and simple scenarios. Conduct valuation and comparable company research and help prepare the investor deck and narrative.</p>
+        </div>
+        <div class="exp-card">
+            <p class="role">Equity Research Associate</p>
+            <p class="org">Axis Direct</p>
+            <p class="meta">Sep 2024 &ndash; Apr 2025 &middot; Mumbai, India</p>
+            <p class="desc">Collaborated with the lead equity research analyst on Auto and Auto Ancillary sector coverage across three quarters. Built and maintained detailed cash flow / PE models with forecasts for 14 listed names. Co-authored IPO notes (Hyundai Motor India, Ather Energy), earnings updates, and industry volume outlooks. Converted internship into a full-time role.</p>
+        </div>
+        <div class="exp-card">
+            <p class="role">Equity Research Intern</p>
+            <p class="org">Axis Direct</p>
+            <p class="meta">Jul 2024 &ndash; Aug 2024 &middot; Mumbai, India</p>
+            <p class="desc">Supported the lead analyst in Pharma and Hospitality sectors through industry analysis, financial modelling, and co-authoring research reports. Co-authored two initiating coverage reports on Chalet Hotels and Juniper.</p>
+        </div>
+        <div class="exp-card">
+            <p class="role">Undergraduate Research Assistant</p>
+            <p class="org">BITS Pilani</p>
+            <p class="meta">Apr 2022 &ndash; May 2024 &middot; Hyderabad, India</p>
+            <p class="desc">Co-designed and validated a low-cost stereotaxic device for rodent brain research. Work published in the Bulletin of Materials Science (Indian Academy of Sciences, 2025).</p>
+        </div>
+        <div class="exp-card">
+            <p class="role">Manufacturing Engineer Intern</p>
+            <p class="org">Divgi TorqTransfer Systems Ltd</p>
+            <p class="meta">Jul 2023 &ndash; Dec 2023 &middot; Sirsi, Karnataka, India</p>
+        </div>
+        <div class="exp-card">
+            <p class="role">HVAC Engineer Intern</p>
+            <p class="org">Grasim Industries Limited, Pulp &amp; Fibre</p>
+            <p class="meta">May 2022 &ndash; Jul 2022 &middot; Nagda, Madhya Pradesh, India</p>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- Education + Certs -->
+<section id="education">
+    <p class="section-label">Credentials</p>
+    <h2>Education &amp; Certifications</h2>
+    <div class="two-col">
+        <div class="info-card">
+            <p class="card-title">Education</p>
+            <div class="item">
+                <p class="item-title">Purdue University</p>
+                <p class="item-sub">Mitchell E. Daniels, Jr. School of Business</p>
+                <p class="item-sub">Master of Science in Finance</p>
+                <p class="item-meta">2025 &ndash; 2026</p>
+            </div>
+            <div class="item" style="margin-top:0.5rem;">
+                <p class="item-title">BITS Pilani, Hyderabad</p>
+                <p class="item-sub">B.E. (Hons.) Mechanical Engineering</p>
+                <p class="item-meta">2020 &ndash; 2024</p>
+            </div>
+        </div>
+        <div class="info-card">
+            <p class="card-title">Licenses &amp; Certifications</p>
+            <div class="item">
+                <p class="item-title">NISM Series XV: Research Analyst</p>
+                <p class="item-meta">NISM &middot; Oct 2024 &ndash; Oct 2027</p>
+            </div>
+            <div class="item" style="margin-top:0.5rem;">
+                <p class="item-title">Bloomberg Market Concepts</p>
+                <p class="item-meta">Bloomberg LP &middot; Feb 2024</p>
+            </div>
+            <div class="item" style="margin-top:0.8rem;">
+                <p class="card-title" style="margin-bottom:0.4rem;">Publication</p>
+                <p class="item-sub" style="line-height:1.5;">Design, Fabrication and Validation of a Low-Cost Stereotaxic Device for Brain Research in Rodents</p>
+                <p class="item-meta">A. Wadkar, <strong>H. Patkar</strong>, S.P. Kommajosyula</p>
+                <p class="item-meta">Bulletin of Materials Science, Vol. 48 &middot; Indian Academy of Sciences &middot; 2025</p>
+                <a href="https://www.ias.ac.in/article/fulltext/boms/048/0028" target="_blank" style="font-size:0.65rem;color:#8E6F3E;font-weight:600;">View Full Text &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p class="copy">&copy; 2026 Heramb S. Patkar &middot; Purdue University</p>
+    <div class="foot-links">
+        <a href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/HPATKAR" target="_blank">GitHub</a>
+        <a href="mailto:hpatkar@purdue.edu">Email</a>
+    </div>
+</footer>
+
+</body>
+</html>
