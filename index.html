@@ -30,6 +30,51 @@
             --px: clamp(1.5rem, 5vw, 3.5rem);
         }
 
+        /* ── Dark mode ── */
+        [data-theme="dark"] {
+            --bg: #101010;
+            --bg-warm: #181818;
+            --bg-card: #1A1A1A;
+            --ink: #E8E5E0;
+            --ink-2: #D0CDC8;
+            --ink-3: #A8A8A8;
+            --ink-4: #7A7A7A;
+            --ink-5: #555555;
+            --gold: #C5B494;
+            --gold-light: #9C8762;
+            --gold-bg: rgba(197,180,148,0.1);
+            --rule: #2A2A2A;
+            --rule-light: #1E1E1E;
+        }
+        [data-theme="dark"] .nav {
+            background: rgba(16,16,16,0.9);
+        }
+        [data-theme="dark"] .m-nav {
+            background: rgba(16,16,16,0.95);
+        }
+        [data-theme="dark"] .hero-photo {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        [data-theme="dark"] .edu-card:hover {
+            box-shadow: 0 6px 32px rgba(0,0,0,0.2);
+        }
+        [data-theme="dark"] .btn-dark {
+            background: var(--gold); color: #111;
+            border-color: var(--gold);
+        }
+        [data-theme="dark"] .btn-dark:hover {
+            background: var(--gold-light); color: #111;
+        }
+        [data-theme="dark"] ::selection {
+            background: var(--gold); color: #111;
+        }
+        [data-theme="dark"] .hero-photo img {
+            filter: grayscale(12%) contrast(1.02) brightness(0.95);
+        }
+        [data-theme="dark"] .edu-logo {
+            filter: brightness(0) invert(1) opacity(0.7);
+        }
+
         html { font-size: 16px; scroll-behavior: smooth; }
 
         body {
@@ -37,6 +82,7 @@
             color: var(--ink);
             background: var(--bg);
             -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
         }
 
         ::selection { background: var(--gold); color: #fff; }
@@ -55,7 +101,19 @@
             height: 52px;
             border-bottom: 1px solid var(--rule-light);
         }
-        .nav-links { display: flex; gap: 2.2rem; }
+        .nav-links { display: flex; gap: 2.2rem; align-items: center; }
+        .theme-toggle {
+            background: none; border: 1px solid var(--rule);
+            border-radius: 3px;
+            width: 30px; height: 30px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--ink-4);
+            margin-left: 1rem;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .theme-toggle:hover { color: var(--ink); border-color: var(--ink-4); }
+        .theme-toggle svg { width: 14px; height: 14px; }
         .nav-links a {
             font-size: 0.7rem; font-weight: 500;
             color: var(--ink-4); text-decoration: none;
@@ -439,6 +497,10 @@
             <a href="#publication">Publication</a>
             <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            </button>
         </div>
     </div>
 </nav>
@@ -662,6 +724,31 @@
             var t = document.querySelector(a.getAttribute('href'));
             if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
+    });
+
+    // Theme toggle
+    var html = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var iconSun = document.getElementById('iconSun');
+    var iconMoon = document.getElementById('iconMoon');
+
+    function setTheme(dark) {
+        html.setAttribute('data-theme', dark ? 'dark' : 'light');
+        iconSun.style.display = dark ? 'block' : 'none';
+        iconMoon.style.display = dark ? 'none' : 'block';
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
+
+    // Init: check saved preference, then system preference
+    var saved = localStorage.getItem('theme');
+    if (saved) {
+        setTheme(saved === 'dark');
+    } else {
+        setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+
+    toggle.addEventListener('click', function() {
+        setTheme(html.getAttribute('data-theme') !== 'dark');
     });
 })();
 </script>
