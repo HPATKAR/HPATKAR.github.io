@@ -6,1125 +6,795 @@
     <title>Heramb S. Patkar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #0a0a0a;
-            --cream: #F0EDE8;
-            --cream-80: rgba(240,237,232,0.88);
-            --cream-50: rgba(240,237,232,0.68);
-            --cream-30: rgba(240,237,232,0.45);
-            --cream-15: rgba(240,237,232,0.22);
-            --cream-08: rgba(240,237,232,0.12);
-            --cream-04: rgba(240,237,232,0.06);
-            --heading: 'Space Grotesk', sans-serif;
-            --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --pad-x: clamp(2rem, 6vw, 5.5rem);
+            --bg: #FAFAF8;
+            --bg-alt: #F3F2EF;
+            --ink: #1B1B1B;
+            --ink-secondary: #3D3D3D;
+            --ink-muted: #777777;
+            --ink-light: #A0A0A0;
+            --accent: #8B7355;
+            --accent-light: #C4AD8F;
+            --border: #E0DDD8;
+            --border-light: #ECEAE5;
+            --serif: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-w: 1080px;
+            --pad-x: clamp(1.5rem, 5vw, 4rem);
         }
 
-        html { font-size: 16px; }
-        html.lenis, html.lenis body { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        html { font-size: 16px; scroll-behavior: smooth; }
 
         body {
-            font-family: var(--body);
-            color: var(--cream);
+            font-family: var(--sans);
+            color: var(--ink);
             background: var(--bg);
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Noise */
-        body::after {
-            content: '';
-            position: fixed; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-            pointer-events: none; z-index: 9990; opacity: 0.35;
+        ::selection {
+            background: var(--accent);
+            color: #fff;
         }
 
-        /* Progress */
-        .scroll-progress {
-            position: fixed; top: 0; left: 0;
-            height: 1px; background: var(--cream-50);
-            z-index: 10000; width: 0%;
-        }
+        a { color: inherit; }
 
-        /* Cursor */
-        .cursor-dot {
-            position: fixed; width: 5px; height: 5px;
-            background: var(--cream); border-radius: 50%;
-            pointer-events: none; z-index: 9999;
-            transform: translate(-50%,-50%);
-            mix-blend-mode: difference;
-        }
-        .cursor-ring { display: none; }
-
-        /* ── Top nav (desktop) ── */
-        .topnav {
-            position: fixed; top: 0; left: 0; right: 0;
-            z-index: 9995;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 1.4rem var(--pad-x);
-            opacity: 0; transform: translateY(-8px);
-            transition: opacity 0.6s ease 1.5s, transform 0.6s ease 1.5s;
-        }
-        .topnav.show { opacity: 1; transform: translateY(0); }
-        .topnav-name {
-            font-family: var(--heading);
-            font-size: 0.8rem; font-weight: 600;
-            letter-spacing: 0.06em; text-transform: uppercase;
-            color: var(--cream-50);
-        }
-        .topnav-links { display: flex; gap: 2.5rem; }
-        .topnav-links a {
-            font-size: 0.72rem; font-weight: 500;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--cream-30); text-decoration: none;
-            transition: color 0.25s;
-        }
-        .topnav-links a:hover { color: var(--cream-80); }
-
-        /* Section divider */
-        .section-rule {
-            width: 100%; height: 1px;
-            background: var(--cream-08);
-            margin: 0;
-        }
-
-        /* ========================================
-           HERO
-        ======================================== */
-        .hero {
-            position: relative;
-            height: 100vh; width: 100%;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+        .container {
+            max-width: var(--max-w);
+            margin: 0 auto;
             padding: 0 var(--pad-x);
         }
 
-        .hero-name {
-            font-family: var(--heading);
-            font-size: clamp(2.8rem, 10vw, 10rem);
-            font-weight: 700;
-            letter-spacing: -0.045em;
-            line-height: 0.95;
-            text-align: center;
+        /* ── Nav ── */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(250,250,248,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
         }
-        .hero-name .char {
-            display: inline-block;
-            opacity: 0; transform: translateY(110%);
+        .nav-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
         }
-        .hero-name .space { width: 0.22em; }
+        .nav-name {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: 0.01em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--ink); }
 
+        /* ── Hero ── */
+        .hero {
+            padding: 8.5rem 0 5rem;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-overline {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            font-weight: 500;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+        }
         .hero-subtitle {
-            font-size: 0.85rem; font-weight: 400;
-            letter-spacing: 0.25em; text-transform: uppercase;
-            color: var(--cream-50);
-            margin-top: 2rem;
-            opacity: 0;
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--ink-muted);
+            margin-top: 0.8rem;
         }
-
-        .hero-photo-wrap {
-            position: absolute;
-            right: var(--pad-x); top: 50%;
-            transform: translateY(-50%);
-            width: clamp(120px, 13vw, 210px);
+        .hero-desc {
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            color: var(--ink-secondary);
+            line-height: 1.75;
+            margin-top: 1.5rem;
+            max-width: 540px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--sans);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--ink);
+            color: #fff;
+            border: 1px solid var(--ink);
+        }
+        .btn-primary:hover {
+            background: var(--ink-secondary);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--ink-secondary);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--ink-muted);
+            color: var(--ink);
         }
         .hero-photo {
-            width: 100%; border-radius: 8px;
+            width: 200px;
+            height: 250px;
+            border-radius: 6px;
             overflow: hidden;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.45);
-            border: 1px solid var(--cream-08);
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
         }
         .hero-photo img {
-            width: 100%; display: block;
-            filter: grayscale(15%) contrast(1.05);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(15%);
         }
 
-        .hero-links {
-            position: absolute; bottom: 2.8rem; left: var(--pad-x);
-            display: flex; gap: 2rem; opacity: 0;
+        /* ── Section ── */
+        .section {
+            padding: 4.5rem 0;
+            border-top: 1px solid var(--border-light);
         }
-        .hero-links a {
-            color: var(--cream-30);
-            text-decoration: none;
-            font-size: 0.72rem; font-weight: 500;
-            letter-spacing: 0.1em; text-transform: uppercase;
-            transition: color 0.25s;
-            position: relative;
-        }
-        .hero-links a::after {
-            content: '';
-            position: absolute; bottom: -3px; left: 0;
-            width: 0; height: 1px; background: var(--cream-50);
-            transition: width 0.3s ease;
-        }
-        .hero-links a:hover { color: var(--cream-80); }
-        .hero-links a:hover::after { width: 100%; }
-
-        .scroll-indicator {
-            position: absolute; bottom: 2.8rem; left: 50%;
-            transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center;
-            gap: 0.6rem; opacity: 0;
-        }
-        .scroll-indicator span {
-            font-size: 0.6rem; letter-spacing: 0.2em;
-            text-transform: uppercase; color: var(--cream-30);
-        }
-        .scroll-indicator .line {
-            width: 1px; height: 36px;
-            background: linear-gradient(var(--cream-30), transparent);
-        }
-
-        /* ========================================
-           ABOUT
-        ======================================== */
-        .about {
-            min-height: auto;
-            display: flex; align-items: center;
-            padding: 8rem var(--pad-x);
-            gap: clamp(3rem, 6vw, 6rem);
-        }
-        .about-text {
-            flex: 3;
-            font-family: var(--heading);
-            font-size: clamp(1.3rem, 2.6vw, 2.6rem);
-            font-weight: 400;
-            line-height: 1.6;
-        }
-        .about-text .word {
-            display: inline-block;
-            opacity: 0.1;
-            margin-right: 0.2em;
-        }
-        .about-stats {
-            flex: 1; min-width: 240px;
-            display: flex; flex-direction: column;
-            gap: 0;
-            border-left: 1px solid var(--cream-08);
-            padding-left: clamp(1.5rem, 3vw, 3rem);
-        }
-        .stat {
-            padding: 1.4rem 0;
-            border-bottom: 1px solid var(--cream-08);
-        }
-        .stat:last-child { border-bottom: none; }
-        .stat-label {
-            font-size: 0.65rem; font-weight: 600;
-            letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--cream-30);
-            margin-bottom: 0.5rem;
-        }
-        .stat-value {
-            font-family: var(--heading);
-            font-size: clamp(0.95rem, 1.5vw, 1.4rem);
+        .section-label {
+            font-family: var(--sans);
+            font-size: 0.65rem;
             font-weight: 600;
-            line-height: 1.3;
-        }
-
-        /* ========================================
-           EXPERIENCE
-        ======================================== */
-        .experience-section { position: relative; }
-        .experience-header {
-            padding: 5rem var(--pad-x) 2.5rem;
-            display: flex; align-items: baseline; gap: 2rem;
-        }
-        .experience-header h2 {
-            font-family: var(--heading);
-            font-size: clamp(1.6rem, 3.5vw, 3.2rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-        .experience-header .rule {
-            flex: 1; height: 1px;
-            background: var(--cream-08);
-        }
-
-        .experience-track {
-            display: flex;
-            gap: 1.5rem;
-            padding: 0 var(--pad-x) 6rem;
-            width: max-content;
-        }
-        .exp-card {
-            width: clamp(360px, 42vw, 600px);
-            background: var(--cream-04);
-            border: 1px solid var(--cream-08);
-            border-radius: 10px;
-            padding: 2.6rem 2.8rem;
-            flex-shrink: 0;
-            opacity: 0.4;
-            transform: translateY(16px);
-            transition: opacity 0.5s, border-color 0.5s, background 0.5s;
-        }
-        .exp-card.active {
-            opacity: 1;
-            border-color: var(--cream-15);
-            background: var(--cream-08);
-        }
-        .exp-card-company {
-            font-family: var(--heading);
-            font-size: clamp(1.2rem, 2vw, 1.8rem);
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-        .exp-card-location {
-            font-size: 0.72rem; color: var(--cream-30);
-            letter-spacing: 0.04em; margin-top: 0.2rem;
-        }
-        .exp-card-divider {
-            width: 32px; height: 1px;
-            background: var(--cream-15);
-            margin: 1.2rem 0;
-        }
-        .exp-card-role {
-            font-size: 0.95rem; font-weight: 600;
-        }
-        .exp-card-dates {
-            font-size: 0.72rem; color: var(--cream-30);
-            margin-top: 0.3rem; font-weight: 400;
-            letter-spacing: 0.02em;
-        }
-        .exp-card-bullets {
-            margin-top: 1.2rem; list-style: none;
-        }
-        .exp-card-bullets li {
-            font-size: 0.8rem; color: var(--cream-50);
-            line-height: 1.75; padding-left: 1rem;
-            position: relative; margin-bottom: 0.4rem;
-        }
-        .exp-card-bullets li::before {
-            content: '';
-            position: absolute; left: 0; top: 0.6em;
-            width: 3px; height: 3px; border-radius: 50%;
-            background: var(--cream-15);
-            transition: background 0.3s;
-        }
-        .exp-card.active .exp-card-bullets li::before {
-            background: var(--cream-50);
-        }
-
-        /* ========================================
-           EDUCATION
-        ======================================== */
-        .education {
-            min-height: auto;
-            display: flex; flex-direction: column;
-            justify-content: center;
-            padding: 6rem var(--pad-x);
-        }
-        .education-header {
-            display: flex; align-items: baseline; gap: 2rem;
-            margin-bottom: 3.5rem;
-        }
-        .education-header h2 {
-            font-family: var(--heading);
-            font-size: clamp(1.6rem, 3.5vw, 3.2rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-        .education-header .rule {
-            flex: 1; height: 1px; background: var(--cream-08);
-        }
-        .edu-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-        .edu-card {
-            background: var(--cream-04);
-            border: 1px solid var(--cream-08);
-            border-radius: 10px;
-            padding: 2.8rem 3rem;
-            opacity: 0;
-        }
-        .edu-card-school {
-            font-family: var(--heading);
-            font-size: clamp(1.15rem, 1.8vw, 1.65rem);
-            font-weight: 700;
-        }
-        .edu-card-sub {
-            font-size: 0.72rem; color: var(--cream-30);
-            margin-top: 0.25rem; letter-spacing: 0.04em;
-        }
-        .edu-card-divider {
-            width: 32px; height: 1px;
-            background: var(--cream-15);
-            margin: 1.2rem 0;
-        }
-        .edu-card-degree {
-            font-size: 0.95rem; font-weight: 600;
-        }
-        .edu-card-year {
-            font-size: 0.72rem; color: var(--cream-30);
-            margin-top: 0.3rem;
-        }
-        .edu-card-courses {
-            display: flex; flex-wrap: wrap; gap: 0.4rem;
-            margin-top: 1.4rem;
-        }
-        .edu-card-courses span {
-            font-size: 0.68rem; font-weight: 500;
-            color: var(--cream-50);
-            padding: 0.3rem 0.8rem;
-            border: 1px solid var(--cream-08);
-            border-radius: 3px;
-            letter-spacing: 0.02em;
-        }
-
-        /* ========================================
-           PUBLICATION
-        ======================================== */
-        .publication {
-            min-height: auto;
-            display: flex; flex-direction: column;
-            justify-content: center;
-            padding: 6rem var(--pad-x);
-        }
-        .pub-label {
-            font-size: 0.68rem; font-weight: 600;
-            letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--cream-30);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
             margin-bottom: 2rem;
         }
-        .pub-title {
-            font-family: var(--heading);
-            font-size: clamp(1.6rem, 3.5vw, 3.2rem);
-            font-weight: 700;
-            line-height: 1.25;
-            letter-spacing: -0.025em;
-            max-width: 50ch;
+        .section h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.6rem, 2.5vw, 2rem);
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 2rem;
+            letter-spacing: -0.005em;
+        }
+
+        /* ── Experience ── */
+        .exp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .exp-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2.5rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .exp-item:first-child { padding-top: 0; }
+        .exp-item:last-child { border-bottom: none; }
+        .exp-meta {
+            padding-top: 0.15rem;
+        }
+        .exp-company {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .exp-location {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            color: var(--ink-light);
+            margin-top: 0.25rem;
+        }
+        .exp-dates {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            margin-top: 0.4rem;
+        }
+        .exp-role {
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.7rem;
+        }
+        .exp-bullets {
+            list-style: none;
+        }
+        .exp-bullets li {
+            font-family: var(--sans);
+            font-size: 0.84rem;
+            color: var(--ink-secondary);
+            line-height: 1.7;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.35rem;
+        }
+        .exp-bullets li::before {
+            content: '\2013';
+            position: absolute;
+            left: 0;
+            color: var(--ink-light);
+        }
+
+        /* ── Education ── */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .edu-card {
+            padding: 2rem;
+            background: var(--bg-alt);
+            border-radius: 6px;
+            border: 1px solid var(--border-light);
+        }
+        .edu-school {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .edu-campus {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            margin-top: 0.15rem;
+        }
+        .edu-degree {
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--ink-secondary);
+            margin-top: 0.9rem;
+        }
+        .edu-year {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            color: var(--ink-light);
+            margin-top: 0.2rem;
+        }
+        .edu-courses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 1rem;
+        }
+        .edu-tag {
+            font-family: var(--sans);
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+            padding: 0.25rem 0.7rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+        }
+
+        /* ── Publication ── */
+        .pub-card {
+            padding: 2.5rem;
+            background: var(--bg-alt);
+            border: 1px solid var(--border-light);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
         }
         .pub-journal {
-            font-size: 0.75rem; font-weight: 500;
-            letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--cream-30);
-            margin-top: 1.8rem;
+            font-family: var(--sans);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            margin-bottom: 0.8rem;
+        }
+        .pub-title {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--ink);
+            max-width: 42ch;
         }
         .pub-authors {
-            font-size: 0.88rem; color: var(--cream-50);
-            margin-top: 0.8rem; line-height: 1.6;
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: var(--ink-muted);
+            margin-top: 0.8rem;
         }
-        .pub-authors strong { color: var(--cream); font-weight: 600; }
-        .pub-cta {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            margin-top: 2.5rem;
-            font-size: 0.78rem; font-weight: 600;
-            color: var(--cream); text-decoration: none;
-            letter-spacing: 0.06em; text-transform: uppercase;
-            transition: gap 0.3s ease;
+        .pub-authors strong {
+            color: var(--ink);
+            font-weight: 600;
         }
-        .pub-cta:hover { gap: 0.9rem; }
-        .pub-cta .arrow {
-            display: inline-block;
-            width: 20px; height: 1px;
-            background: var(--cream-50);
-            position: relative;
-            transition: width 0.3s ease, background 0.3s;
+        .pub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 1.2rem;
+            font-family: var(--sans);
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
         }
-        .pub-cta:hover .arrow { width: 36px; background: var(--cream); }
-        .pub-cta .arrow::after {
-            content: '';
-            position: absolute; right: 0; top: -3px;
-            width: 7px; height: 7px;
-            border-top: 1px solid var(--cream-50);
-            border-right: 1px solid var(--cream-50);
-            transform: rotate(45deg);
-            transition: border-color 0.3s;
-        }
-        .pub-cta:hover .arrow::after { border-color: var(--cream); }
+        .pub-link:hover { color: var(--ink); }
+        .pub-link svg { width: 14px; height: 14px; }
 
-        /* ========================================
-           SKILLS
-        ======================================== */
-        .skills {
-            min-height: auto;
-            display: flex; flex-direction: column;
-            justify-content: center;
-            padding: 6rem var(--pad-x);
-        }
-        .skills-header {
-            display: flex; align-items: baseline; gap: 2rem;
-            margin-bottom: 4rem;
-        }
-        .skills-header h2 {
-            font-family: var(--heading);
-            font-size: clamp(1.6rem, 3.5vw, 3.2rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-        .skills-header .rule {
-            flex: 1; height: 1px; background: var(--cream-08);
-        }
+        /* ── Skills ── */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2.5rem;
+            gap: 2rem;
         }
-        .skills-category {}
-        .skills-category-label {
-            font-size: 0.68rem; font-weight: 600;
-            letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--cream-30);
-            margin-bottom: 1rem;
+        .skills-cat-label {
+            font-family: var(--sans);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            margin-bottom: 0.8rem;
             padding-bottom: 0.6rem;
-            border-bottom: 1px solid var(--cream-08);
+            border-bottom: 1px solid var(--border-light);
         }
-        .skills-chips {
-            display: flex; flex-wrap: wrap; gap: 0.45rem;
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
         }
-        .chip {
-            font-size: 0.76rem; font-weight: 500;
-            color: var(--cream-80);
-            padding: 0.4rem 0.9rem;
-            background: var(--cream-04);
-            border: 1px solid var(--cream-08);
-            border-radius: 4px;
-            cursor: default;
-            transition: border-color 0.25s, background 0.25s;
-        }
-        .chip:hover {
-            border-color: var(--cream-15);
-            background: var(--cream-08);
+        .skills-list span {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: var(--ink-secondary);
+            line-height: 1.5;
         }
 
-
-        /* ========================================
-           CONTACT
-        ======================================== */
-        .contact {
-            padding: 8rem var(--pad-x) 4rem;
-            display: flex; flex-direction: column;
-            align-items: center; text-align: center;
+        /* ── Footer ── */
+        .footer {
+            padding: 4rem 0 3rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
         }
-        .contact h2 {
-            font-family: var(--heading);
-            font-size: clamp(2rem, 5.5vw, 5rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
+        .footer h2 {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--ink);
         }
-        .contact-sub {
-            font-size: 0.85rem; color: var(--cream-30);
-            margin-top: 1.2rem; letter-spacing: 0.02em;
-            max-width: 480px; line-height: 1.65;
+        .footer-sub {
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            color: var(--ink-muted);
+            margin-top: 0.6rem;
+            line-height: 1.6;
         }
-        .contact-links {
-            display: flex; gap: 1rem; flex-wrap: wrap;
+        .footer-links {
+            display: flex;
+            gap: 0.75rem;
             justify-content: center;
-            margin-top: 3rem;
+            margin-top: 1.8rem;
         }
-        .contact-link {
-            color: var(--cream-50);
+        .footer-link {
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--ink-secondary);
             text-decoration: none;
-            font-size: 0.78rem; font-weight: 500;
-            letter-spacing: 0.06em; text-transform: uppercase;
-            padding: 0.7rem 2rem;
-            border: 1px solid var(--cream-08);
+            padding: 0.55rem 1.5rem;
+            border: 1px solid var(--border);
             border-radius: 4px;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
-        .contact-link:hover {
-            color: var(--bg);
-            background: var(--cream);
-            border-color: var(--cream);
+        .footer-link:hover {
+            border-color: var(--ink);
+            color: var(--ink);
         }
-        .contact-copy {
-            margin-top: 5rem;
-            font-size: 0.65rem; color: var(--cream-30);
-            letter-spacing: 0.08em; text-transform: uppercase;
+        .footer-copy {
+            margin-top: 3rem;
+            font-family: var(--sans);
+            font-size: 0.68rem;
+            color: var(--ink-light);
+            letter-spacing: 0.04em;
         }
 
-        /* ========================================
-           MOBILE
-        ======================================== */
+        /* ── Animations ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Mobile ── */
         @media (max-width: 768px) {
-            :root { --pad-x: 1.25rem; }
-            .cursor-dot, .cursor-ring { display: none !important; }
-            .topnav { display: none; }
+            .nav-links { display: none; }
+            .nav-inner { height: 48px; }
 
-            /* Hero */
-            .hero {
-                padding: 0 var(--pad-x);
-                justify-content: center;
-                align-items: center;
+            .hero { padding: 6.5rem 0 3.5rem; }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
                 text-align: center;
-            }
-            .hero-name {
-                font-size: clamp(2.6rem, 13vw, 4.5rem);
-                letter-spacing: -0.035em;
-            }
-            .hero-subtitle {
-                font-size: 0.62rem;
-                letter-spacing: 0.2em;
-                margin-top: 1.2rem;
-            }
-            .hero-photo-wrap {
-                position: relative; right: auto; top: auto;
-                transform: none;
-                margin-top: 2rem;
-                width: 100px;
             }
             .hero-photo {
-                border-radius: 6px;
+                width: 140px;
+                height: 175px;
+                margin: 0 auto;
+                order: -1;
             }
-            .hero-links {
-                position: relative; bottom: auto; left: auto;
-                margin-top: 1.8rem;
+            .hero h1 { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-desc {
+                font-size: 0.84rem;
+                margin: 1rem auto 0;
+            }
+            .hero-actions {
                 justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .section { padding: 3rem 0; }
+
+            .exp-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 1.5rem 0;
+            }
+
+            .edu-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .edu-card { padding: 1.5rem; }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
                 gap: 1.5rem;
             }
-            .hero-links a {
-                font-size: 0.55rem;
-                letter-spacing: 0.1em;
-            }
-            .scroll-indicator { display: none; }
 
-            /* About */
-            .about {
-                flex-direction: column;
-                min-height: auto;
-                padding: 4rem var(--pad-x);
-                gap: 2rem;
-            }
-            .about-text {
-                font-size: 1.05rem;
-                line-height: 1.7;
-            }
-            .about-stats {
-                border-left: none; padding-left: 0;
-                border-top: 1px solid var(--cream-08);
-                padding-top: 0;
-                flex-direction: column;
-                gap: 0;
-            }
-            .stat {
-                padding: 1rem 0;
-                border-bottom: 1px solid var(--cream-08);
-                transform: none !important;
-            }
-            .stat:last-child { border-bottom: none; }
-            .stat-label { font-size: 0.5rem; margin-bottom: 0.3rem; }
-            .stat-value { font-size: 0.9rem; }
+            .pub-card { padding: 1.5rem; }
+            .pub-title { font-size: 1.1rem; }
 
-            /* Experience */
-            .experience-section { overflow: visible; }
-            .experience-header {
-                padding: 3rem var(--pad-x) 1.5rem;
-                gap: 1rem;
-            }
-            .experience-header h2 { font-size: 1.4rem; }
-            .experience-track {
-                flex-direction: column;
-                width: 100%;
-                padding: 0 var(--pad-x) 2.5rem;
-                gap: 0.8rem;
-            }
-            .exp-card {
-                width: 100%;
-                opacity: 1; transform: none;
-                padding: 1.6rem 1.4rem;
-                border-radius: 8px;
-            }
-            .exp-card-company { font-size: 1.1rem; }
-            .exp-card-location { font-size: 0.58rem; }
-            .exp-card-divider { margin: 0.8rem 0; }
-            .exp-card-role { font-size: 0.82rem; }
-            .exp-card-dates { font-size: 0.58rem; }
-            .exp-card-bullets { margin-top: 0.8rem; }
-            .exp-card-bullets li {
-                font-size: 0.72rem; line-height: 1.65;
-                margin-bottom: 0.3rem;
-            }
-
-            /* Education */
-            .education {
-                padding: 4rem var(--pad-x);
-                min-height: auto;
-            }
-            .education-header {
-                margin-bottom: 2rem;
-                gap: 1rem;
-            }
-            .education-header h2 { font-size: 1.4rem; }
-            .edu-cards { grid-template-columns: 1fr !important; gap: 0.8rem; }
-            .edu-card {
-                padding: 1.6rem 1.4rem !important;
-                border-radius: 8px;
-            }
-            .edu-card-school { font-size: 1.1rem; }
-            .edu-card-sub { font-size: 0.58rem; }
-            .edu-card-divider { margin: 0.8rem 0; }
-            .edu-card-degree { font-size: 0.82rem; }
-            .edu-card-year { font-size: 0.58rem; }
-            .edu-card-courses { margin-top: 1rem; gap: 0.35rem; }
-            .edu-card-courses span { font-size: 0.55rem; padding: 0.2rem 0.55rem; }
-
-            /* Publication */
-            .publication {
-                padding: 4rem var(--pad-x);
-                min-height: auto;
-            }
-            .pub-label { font-size: 0.5rem; margin-bottom: 1.5rem; }
-            .pub-title { font-size: 1.3rem; line-height: 1.35; }
-            .pub-journal { font-size: 0.58rem; margin-top: 1.5rem; }
-            .pub-authors { font-size: 0.75rem; margin-top: 0.6rem; }
-            .pub-cta { font-size: 0.62rem; margin-top: 1.8rem; }
-
-            /* Skills */
-            .skills {
-                padding: 4rem var(--pad-x);
-                min-height: auto;
-            }
-            .skills-header {
-                margin-bottom: 2.5rem;
-                gap: 1rem;
-            }
-            .skills-header h2 { font-size: 1.4rem; }
-            .skills-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1.8rem;
-            }
-            .skills-category-label { font-size: 0.5rem; margin-bottom: 0.7rem; }
-            .chip {
-                font-size: 0.65rem;
-                padding: 0.35rem 0.75rem;
-            }
-
-            /* Contact */
-            .contact {
-                padding: 4rem var(--pad-x) 6rem;
-            }
-            .contact h2 { font-size: 1.8rem; }
-            .contact-sub { font-size: 0.65rem; margin-top: 0.8rem; }
-            .contact-links {
-                margin-top: 2rem;
-                gap: 0.6rem;
+            .footer-links {
                 flex-direction: column;
                 align-items: center;
-                width: 100%;
             }
-            .contact-link {
-                font-size: 0.62rem;
-                padding: 0.55rem 1.4rem;
-                width: 100%;
-                max-width: 260px;
-                text-align: center;
-            }
-            .contact-copy {
-                margin-top: 3rem;
-                font-size: 0.5rem;
-            }
+            .footer-link { width: 200px; text-align: center; }
 
-            /* Section rules */
-            .section-rule {
-                margin: 0 var(--pad-x);
-                width: auto;
-            }
-        }
-
-        /* Mobile nav pill */
-        .mobile-nav { display: none; }
-        @media (max-width: 768px) {
+            /* Mobile bottom nav */
             .mobile-nav {
                 display: flex;
-                position: fixed; bottom: 0.8rem; left: 50%;
-                transform: translateX(-50%);
-                background: rgba(10,10,10,0.92);
-                backdrop-filter: blur(24px);
-                -webkit-backdrop-filter: blur(24px);
-                border: 1px solid var(--cream-08);
-                border-radius: 8px;
-                padding: 0.3rem;
-                gap: 0.15rem;
-                z-index: 9995;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            }
-            .mobile-nav a {
-                font-size: 0.52rem; font-weight: 600;
-                color: var(--cream-30);
-                text-decoration: none;
-                padding: 0.4rem 0.7rem;
-                border-radius: 5px;
-                text-transform: uppercase;
-                letter-spacing: 0.06em;
-                transition: color 0.2s, background 0.2s;
-                white-space: nowrap;
-            }
-            .mobile-nav a:hover, .mobile-nav a.active {
-                color: var(--cream-80);
-                background: var(--cream-08);
             }
         }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(250,250,248,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-light);
+            justify-content: center;
+            gap: 0;
+            padding: 0;
+        }
+        .mobile-nav a {
+            flex: 1;
+            text-align: center;
+            font-family: var(--sans);
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: var(--ink-muted);
+            text-decoration: none;
+            padding: 0.65rem 0;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .mobile-nav a:hover,
+        .mobile-nav a.active { color: var(--ink); }
     </style>
 </head>
 <body>
 
-<!-- Progress -->
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- Cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-
-<!-- Top nav -->
-<nav class="topnav" id="topnav">
-    <span class="topnav-name">Heramb Patkar</span>
-    <div class="topnav-links">
-        <a href="#about-section">About</a>
-        <a href="#exp-section">Experience</a>
-        <a href="#edu-section">Education</a>
-        <a href="#pub-section">Publication</a>
-        <a href="#skills-section">Skills</a>
-        <a href="#contact-section">Contact</a>
+<!-- Nav -->
+<nav class="nav">
+    <div class="nav-inner">
+        <span class="nav-name">Heramb S. Patkar</span>
+        <div class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#publication">Publication</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
     </div>
 </nav>
 
 <!-- Mobile nav -->
-<nav class="mobile-nav" id="mobileNav">
-    <a href="#about-section">About</a>
-    <a href="#exp-section">Work</a>
-    <a href="#edu-section">Edu</a>
-    <a href="#skills-section">Skills</a>
+<nav class="mobile-nav">
+    <a href="#experience">Work</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
 </nav>
 
-<!-- ════════ HERO ════════ -->
-<section class="hero" id="hero">
-    <div class="hero-name" id="heroName"></div>
-    <p class="hero-subtitle" id="heroSubtitle">Finance &middot; Research &middot; Markets</p>
-    <div class="hero-photo-wrap" id="heroPhotoWrap">
-        <div class="hero-photo" id="heroPhoto">
-            <img src="photo.jpeg" alt="Heramb S. Patkar">
-        </div>
-    </div>
-    <div class="hero-links" id="heroLinks">
-        <a href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
-        <a href="https://github.com/HPATKAR" target="_blank">GitHub</a>
-        <a href="mailto:hpatkar@purdue.edu">Email</a>
-    </div>
-    <div class="scroll-indicator" id="scrollIndicator">
-        <span>Scroll</span>
-        <div class="line"></div>
-    </div>
-</section>
-
-<div class="section-rule"></div>
-
-<!-- ════════ ABOUT ════════ -->
-<section class="about" id="about-section">
-    <div class="about-text" id="aboutText"></div>
-    <div class="about-stats" id="aboutStats">
-        <div class="stat">
-            <div class="stat-label">Education</div>
-            <div class="stat-value">MS Finance, Purdue</div>
-        </div>
-        <div class="stat">
-            <div class="stat-label">Certification</div>
-            <div class="stat-value">NISM XV Research Analyst</div>
-        </div>
-        <div class="stat">
-            <div class="stat-label">Coverage</div>
-            <div class="stat-value">14 Stocks Modelled</div>
-        </div>
-        <div class="stat">
-            <div class="stat-label">Research</div>
-            <div class="stat-value">Published, IAS Journal</div>
-        </div>
-    </div>
-</section>
-
-<div class="section-rule"></div>
-
-<!-- ════════ EXPERIENCE ════════ -->
-<section class="experience-section" id="exp-section">
-    <div class="experience-header">
-        <h2>Experience</h2>
-        <div class="rule"></div>
-    </div>
-    <div class="experience-track" id="expTrack">
-        <div class="exp-card">
-            <p class="exp-card-company">Fino Advisors LLC</p>
-            <p class="exp-card-location">Houston, TX</p>
-            <div class="exp-card-divider"></div>
-            <p class="exp-card-role">Practicum Consultant</p>
-            <p class="exp-card-dates">January 2026 &ndash; Present</p>
-            <ul class="exp-card-bullets">
-                <li>Building and refining a confidential Series A investor model (revenue drivers, scenarios/sensitivities) and translating outputs into decision-ready insights.</li>
-                <li>Conducting valuation work and comps benchmarking; supporting investor materials for a sustainability/infrastructure portfolio company.</li>
-                <li>Synthesizing technical, commercial, and financial inputs into clear assumptions, KPIs, and fundraising-ready outputs.</li>
-            </ul>
-        </div>
-        <div class="exp-card">
-            <p class="exp-card-company">Axis Securities Ltd</p>
-            <p class="exp-card-location">Mumbai, India</p>
-            <div class="exp-card-divider"></div>
-            <p class="exp-card-role">Research Associate</p>
-            <p class="exp-card-dates">September 2024 &ndash; April 2025</p>
-            <ul class="exp-card-bullets">
-                <li>Partnered with the lead equity research analyst on Auto &amp; Auto Ancillary coverage, delivering institutional-grade research for HNIs, fund managers, and institutional clients.</li>
-                <li>Built and maintained detailed cash flow/DCF models for 14 listed companies, contributed to IPO notes, quarterly earnings updates, and industry volume outlooks.</li>
-                <li>Developed a dynamic industry tracker (production, sales, inventory) across segments using official data sources.</li>
-                <li>Attended earnings calls and engaged with senior management to extract strategic insights on pricing, margins, capex, and tariffs.</li>
-                <li>Pitched stock ideas and thematic plays to the PMS team (AUM ~$600Mn) and Head of Research.</li>
-            </ul>
-        </div>
-        <div class="exp-card">
-            <p class="exp-card-company">Axis Securities Ltd</p>
-            <p class="exp-card-location">Mumbai, India</p>
-            <div class="exp-card-divider"></div>
-            <p class="exp-card-role">Equity Research Intern</p>
-            <p class="exp-card-dates">July 2024 &ndash; August 2024</p>
-            <ul class="exp-card-bullets">
-                <li>Supported coverage across Pharma and Hospitality (13 stocks), contributing to thematic research and company updates.</li>
-                <li>Assisted in initiating coverage work and management interactions to extract key drivers, risks, and catalysts.</li>
-            </ul>
-        </div>
-        <div class="exp-card">
-            <p class="exp-card-company">Divgi TorqTransfer Systems</p>
-            <p class="exp-card-location">Sirsi, India</p>
-            <div class="exp-card-divider"></div>
-            <p class="exp-card-role">Manufacturing Engineering Intern</p>
-            <p class="exp-card-dates">July 2023 &ndash; December 2023</p>
-            <ul class="exp-card-bullets">
-                <li>Implemented Lean initiatives and led a 10-intern value-stream mapping effort to identify bottlenecks, cut waste, and improve countershaft-line efficiency by ~2% over two quarters.</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<div class="section-rule"></div>
-
-<!-- ════════ EDUCATION ════════ -->
-<section class="education" id="edu-section">
-    <div class="education-header">
-        <h2>Education</h2>
-        <div class="rule"></div>
-    </div>
-    <div class="edu-cards">
-        <div class="edu-card">
-            <p class="edu-card-school">Purdue University</p>
-            <p class="edu-card-sub">Daniels School of Business</p>
-            <div class="edu-card-divider"></div>
-            <p class="edu-card-degree">Master of Science in Finance</p>
-            <p class="edu-card-year">2026</p>
-            <div class="edu-card-courses">
-                <span>Financial Modelling</span>
-                <span>Investments</span>
-                <span>AI in Finance</span>
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div>
+                <p class="hero-overline">Finance &middot; Research &middot; Markets</p>
+                <h1>Heramb S. Patkar</h1>
+                <p class="hero-subtitle">MS Finance, Purdue University &mdash; Daniels School of Business</p>
+                <p class="hero-desc">Equity research and financial modeling across Autos, Pharma, and Hospitality. Translating quantitative analysis and industry trends into actionable investment insights.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="mailto:hpatkar@purdue.edu">Get in Touch</a>
+                    <a class="btn btn-outline" href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
+                    <a class="btn btn-outline" href="https://github.com/HPATKAR" target="_blank">GitHub</a>
+                </div>
             </div>
-        </div>
-        <div class="edu-card">
-            <p class="edu-card-school">BITS Pilani</p>
-            <p class="edu-card-sub">Hyderabad Campus</p>
-            <div class="edu-card-divider"></div>
-            <p class="edu-card-degree">B.E. Mechanical Engineering</p>
-            <p class="edu-card-year">2024</p>
-            <div class="edu-card-courses">
-                <span>Optimization</span>
-                <span>Manufacturing</span>
-                <span>Materials Science</span>
+            <div class="hero-photo">
+                <img src="photo.jpeg" alt="Heramb S. Patkar">
             </div>
         </div>
     </div>
 </section>
 
-<div class="section-rule"></div>
+<!-- Experience -->
+<section class="section" id="experience">
+    <div class="container">
+        <p class="section-label">Experience</p>
+        <div class="exp-list">
+            <div class="exp-item reveal">
+                <div class="exp-meta">
+                    <p class="exp-company">Fino Advisors LLC</p>
+                    <p class="exp-location">Houston, TX</p>
+                    <p class="exp-dates">Jan 2026 &ndash; Present</p>
+                </div>
+                <div>
+                    <p class="exp-role">Practicum Consultant</p>
+                    <ul class="exp-bullets">
+                        <li>Building and refining a confidential Series A investor model (revenue drivers, scenarios/sensitivities) and translating outputs into decision-ready insights.</li>
+                        <li>Conducting valuation work and comps benchmarking; supporting investor materials for a sustainability/infrastructure portfolio company.</li>
+                        <li>Synthesizing technical, commercial, and financial inputs into clear assumptions, KPIs, and fundraising-ready outputs.</li>
+                    </ul>
+                </div>
+            </div>
 
-<!-- ════════ PUBLICATION ════════ -->
-<section class="publication" id="pub-section">
-    <p class="pub-label">Publication</p>
-    <h3 class="pub-title">Design, Fabrication, and Validation of a Low-Cost Stereotaxic Device for Brain Research in Rodents</h3>
-    <p class="pub-journal">Bulletin of Materials Science &middot; Indian Academy of Sciences &middot; 2025</p>
-    <p class="pub-authors">Avinash Wadkar &middot; <strong>Heramb Patkar</strong> &middot; Srinivasa Prasad Kommajosyula</p>
-    <a class="pub-cta" href="https://www.ias.ac.in/article/fulltext/boms/048/0028" target="_blank">Read Paper <span class="arrow"></span></a>
+            <div class="exp-item reveal">
+                <div class="exp-meta">
+                    <p class="exp-company">Axis Securities Ltd</p>
+                    <p class="exp-location">Mumbai, India</p>
+                    <p class="exp-dates">Sep 2024 &ndash; Apr 2025</p>
+                </div>
+                <div>
+                    <p class="exp-role">Research Associate</p>
+                    <ul class="exp-bullets">
+                        <li>Partnered with the lead equity research analyst on Auto &amp; Auto Ancillary coverage, delivering institutional-grade research for HNIs, fund managers, and institutional clients.</li>
+                        <li>Built and maintained detailed cash flow/DCF models for 14 listed companies, contributed to IPO notes, quarterly earnings updates, and industry volume outlooks.</li>
+                        <li>Developed a dynamic industry tracker (production, sales, inventory) across segments using official data sources.</li>
+                        <li>Attended earnings calls and engaged with senior management to extract strategic insights on pricing, margins, capex, and tariffs.</li>
+                        <li>Pitched stock ideas and thematic plays to the PMS team (AUM ~$600Mn) and Head of Research.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item reveal">
+                <div class="exp-meta">
+                    <p class="exp-company">Axis Securities Ltd</p>
+                    <p class="exp-location">Mumbai, India</p>
+                    <p class="exp-dates">Jul 2024 &ndash; Aug 2024</p>
+                </div>
+                <div>
+                    <p class="exp-role">Equity Research Intern</p>
+                    <ul class="exp-bullets">
+                        <li>Supported coverage across Pharma and Hospitality (13 stocks), contributing to thematic research and company updates.</li>
+                        <li>Assisted in initiating coverage work and management interactions to extract key drivers, risks, and catalysts.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item reveal">
+                <div class="exp-meta">
+                    <p class="exp-company">Divgi TorqTransfer</p>
+                    <p class="exp-location">Sirsi, India</p>
+                    <p class="exp-dates">Jul 2023 &ndash; Dec 2023</p>
+                </div>
+                <div>
+                    <p class="exp-role">Manufacturing Engineering Intern</p>
+                    <ul class="exp-bullets">
+                        <li>Implemented Lean initiatives and led a 10-intern value-stream mapping effort to identify bottlenecks, cut waste, and improve countershaft-line efficiency by ~2% over two quarters.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<div class="section-rule"></div>
-
-<!-- ════════ SKILLS ════════ -->
-<section class="skills" id="skills-section">
-    <div class="skills-header">
-        <h2>Skills</h2>
-        <div class="rule"></div>
-    </div>
-    <div class="skills-grid">
-        <div class="skills-category">
-            <p class="skills-category-label">Platforms</p>
-            <div class="skills-chips">
-                <span class="chip">Bloomberg Terminal</span>
-                <span class="chip">ACE Equity</span>
-                <span class="chip">LSEG Workspace</span>
+<!-- Education -->
+<section class="section" id="education">
+    <div class="container">
+        <p class="section-label">Education</p>
+        <div class="edu-grid">
+            <div class="edu-card reveal">
+                <p class="edu-school">Purdue University</p>
+                <p class="edu-campus">Daniels School of Business</p>
+                <p class="edu-degree">Master of Science in Finance</p>
+                <p class="edu-year">2026</p>
+                <div class="edu-courses">
+                    <span class="edu-tag">Financial Modelling</span>
+                    <span class="edu-tag">Investments</span>
+                    <span class="edu-tag">AI in Finance</span>
+                </div>
             </div>
-        </div>
-        <div class="skills-category">
-            <p class="skills-category-label">Technical</p>
-            <div class="skills-chips">
-                <span class="chip">Python</span>
-                <span class="chip">Excel (Advanced)</span>
-                <span class="chip">Autodesk Suite</span>
-                <span class="chip">Claude CLI</span>
-            </div>
-        </div>
-        <div class="skills-category">
-            <p class="skills-category-label">Research</p>
-            <div class="skills-chips">
-                <span class="chip">DCF / Comps Modeling</span>
-                <span class="chip">IPO Analysis</span>
-                <span class="chip">Earnings Research</span>
-                <span class="chip">Stock Pitching</span>
-                <span class="chip">Industry Tracking</span>
-            </div>
-        </div>
-        <div class="skills-category">
-            <p class="skills-category-label">Certifications</p>
-            <div class="skills-chips">
-                <span class="chip">NISM Series XV Research Analyst</span>
-                <span class="chip">Bloomberg Market Concepts</span>
+            <div class="edu-card reveal">
+                <p class="edu-school">BITS Pilani</p>
+                <p class="edu-campus">Hyderabad Campus</p>
+                <p class="edu-degree">B.E. Mechanical Engineering</p>
+                <p class="edu-year">2024</p>
+                <div class="edu-courses">
+                    <span class="edu-tag">Optimization</span>
+                    <span class="edu-tag">Manufacturing</span>
+                    <span class="edu-tag">Materials Science</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<div class="section-rule"></div>
-
-<!-- ════════ CONTACT ════════ -->
-<section class="contact" id="contact-section">
-    <h2>Let's Connect</h2>
-    <p class="contact-sub">Open to opportunities in equity research, investment analysis, and financial modeling.</p>
-    <div class="contact-links">
-        <a class="contact-link" href="mailto:hpatkar@purdue.edu">hpatkar@purdue.edu</a>
-        <a class="contact-link" href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
-        <a class="contact-link" href="https://github.com/HPATKAR" target="_blank">GitHub</a>
+<!-- Publication -->
+<section class="section" id="publication">
+    <div class="container">
+        <p class="section-label">Publication</p>
+        <div class="pub-card reveal">
+            <p class="pub-journal">Bulletin of Materials Science &middot; Indian Academy of Sciences &middot; 2025</p>
+            <p class="pub-title">Design, Fabrication, and Validation of a Low-Cost Stereotaxic Device for Brain Research in Rodents</p>
+            <p class="pub-authors">Avinash Wadkar &middot; <strong>Heramb Patkar</strong> &middot; Srinivasa Prasad Kommajosyula</p>
+            <a class="pub-link" href="https://www.ias.ac.in/article/fulltext/boms/048/0028" target="_blank">
+                Read Paper
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 11L11 5m0 0H6m5 0v5"/></svg>
+            </a>
+        </div>
     </div>
-    <p class="contact-copy">&copy; 2025 Heramb S. Patkar &middot; West Lafayette, IN</p>
 </section>
 
-<!-- CDN -->
-<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Skills -->
+<section class="section" id="skills">
+    <div class="container">
+        <p class="section-label">Skills &amp; Certifications</p>
+        <div class="skills-grid reveal">
+            <div>
+                <p class="skills-cat-label">Platforms</p>
+                <div class="skills-list">
+                    <span>Bloomberg Terminal</span>
+                    <span>ACE Equity</span>
+                    <span>LSEG Workspace</span>
+                </div>
+            </div>
+            <div>
+                <p class="skills-cat-label">Technical</p>
+                <div class="skills-list">
+                    <span>Python</span>
+                    <span>Excel (Advanced)</span>
+                    <span>Autodesk Suite</span>
+                </div>
+            </div>
+            <div>
+                <p class="skills-cat-label">Research</p>
+                <div class="skills-list">
+                    <span>DCF / Comps Modeling</span>
+                    <span>IPO Analysis</span>
+                    <span>Earnings Research</span>
+                    <span>Stock Pitching</span>
+                    <span>Industry Tracking</span>
+                </div>
+            </div>
+            <div>
+                <p class="skills-cat-label">Certifications</p>
+                <div class="skills-list">
+                    <span>NISM XV Research Analyst</span>
+                    <span>Bloomberg Market Concepts</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<footer class="footer" id="contact">
+    <div class="container">
+        <h2>Let's Connect</h2>
+        <p class="footer-sub">Open to opportunities in equity research, investment analysis, and financial modeling.</p>
+        <div class="footer-links">
+            <a class="footer-link" href="mailto:hpatkar@purdue.edu">hpatkar@purdue.edu</a>
+            <a class="footer-link" href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
+            <a class="footer-link" href="https://github.com/HPATKAR" target="_blank">GitHub</a>
+        </div>
+        <p class="footer-copy">&copy; 2025 Heramb S. Patkar &middot; West Lafayette, IN</p>
+    </div>
+</footer>
 
 <script>
 (function() {
     'use strict';
 
-    // ── Lenis smooth scroll ──
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true
-    });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-    gsap.registerPlugin(ScrollTrigger);
-
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-    // ── Progress bar ──
-    gsap.to('.scroll-progress', {
-        width: '100%', ease: 'none',
-        scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
-    });
-
-    // ── Hero: name reveal ──
-    const heroName = document.getElementById('heroName');
-    'HERAMB PATKAR'.split('').forEach(ch => {
-        const s = document.createElement('span');
-        s.className = ch === ' ' ? 'char space' : 'char';
-        s.textContent = ch === ' ' ? '\u00A0' : ch;
-        heroName.appendChild(s);
-    });
-    gsap.to('#heroName .char', {
-        opacity: 1, y: 0, duration: 0.6,
-        stagger: 0.035, ease: 'power3.out', delay: 0.3
-    });
-    gsap.to('#heroSubtitle', { opacity: 1, duration: 0.8, delay: 0.85 });
-    gsap.to('#heroLinks', { opacity: 1, duration: 0.8, delay: 1.0 });
-    gsap.to('#scrollIndicator', { opacity: 1, duration: 0.8, delay: 1.2 });
-    setTimeout(() => document.getElementById('topnav').classList.add('show'), 1400);
-
-    // ── Cursor dot (desktop) ──
-    if (!isMobile) {
-        const dot = document.getElementById('cursorDot');
-        window.addEventListener('mousemove', e => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-    } else {
-        document.getElementById('cursorDot').style.display = 'none';
-    }
-
-    // ── About: word-by-word scrub ──
-    const aboutStr = "MS Finance candidate at Purdue with a Mechanical Engineering background and equity research experience across Autos, Pharma, and Hospitality. Skilled in valuation modeling, IPO analysis, earnings research, and institutional stock pitching \u2014 translating industry and policy trends into actionable, client-ready insights.";
-    const aboutText = document.getElementById('aboutText');
-    aboutStr.split(' ').forEach(w => {
-        const s = document.createElement('span');
-        s.className = 'word'; s.textContent = w;
-        aboutText.appendChild(s);
-    });
-    const words = aboutText.querySelectorAll('.word');
-    ScrollTrigger.create({
-        trigger: '#about-section',
-        start: 'top 75%', end: 'bottom 35%',
-        scrub: 0.5,
-        onUpdate: self => {
-            const p = self.progress;
-            words.forEach((w, i) => {
-                w.style.opacity = p > i / words.length ? 1 : 0.1;
-            });
-        }
-    });
-
-    // ── Experience: horizontal scroll (desktop) ──
-    if (!isMobile) {
-        const track = document.getElementById('expTrack');
-        const cards = track.querySelectorAll('.exp-card');
-        gsap.to(track, {
-            x: () => -(track.scrollWidth - innerWidth),
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '#exp-section',
-                start: 'top top',
-                end: () => '+=' + (track.scrollWidth - innerWidth),
-                pin: true, scrub: 1,
-                invalidateOnRefresh: true,
-                onUpdate: self => {
-                    const p = self.progress;
-                    cards.forEach((c, i) => {
-                        const active = p >= i / cards.length - 0.08 && p <= (i + 1) / cards.length + 0.08;
-                        c.classList.toggle('active', active);
-                        if (active) gsap.to(c, { opacity: 1, y: 0, duration: 0.4, overwrite: true });
-                    });
-                }
+    // Scroll reveal
+    const els = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
             }
         });
-    } else {
-        document.querySelectorAll('.exp-card').forEach(c => {
-            c.style.opacity = '1'; c.style.transform = 'none';
-        });
-    }
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => observer.observe(el));
 
-    // ── Education: simple fade ──
-    gsap.utils.toArray('.edu-card').forEach(card => {
-        gsap.fromTo(card,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-              scrollTrigger: { trigger: card, start: 'top 82%' } }
-        );
-    });
-
-    // ── Anchor scroll ──
+    // Smooth anchor scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             e.preventDefault();
             const t = document.querySelector(a.getAttribute('href'));
-            if (t) lenis.scrollTo(t);
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
-
 })();
 </script>
 
