@@ -51,14 +51,9 @@
         }
         .nav-inner {
             max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px);
-            display: flex; align-items: center; justify-content: space-between;
+            display: flex; align-items: center; justify-content: flex-end;
             height: 52px;
             border-bottom: 1px solid var(--rule-light);
-        }
-        .nav-name {
-            font-family: var(--serif);
-            font-size: 1.15rem; font-weight: 600;
-            letter-spacing: 0.02em;
         }
         .nav-links { display: flex; gap: 2.2rem; }
         .nav-links a {
@@ -211,6 +206,15 @@
             box-shadow: 0 6px 32px rgba(0,0,0,0.04);
             border-color: var(--gold-light);
         }
+        .edu-logo-row {
+            display: flex; align-items: center; gap: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        .edu-logo {
+            width: 36px; height: 36px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
         .edu-school {
             font-family: var(--serif);
             font-size: 1.15rem; font-weight: 600; color: var(--ink);
@@ -361,7 +365,6 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .nav-inner { height: 46px; }
-            .nav-name { font-size: 1rem; }
 
             .hero { padding: 7rem var(--px) 3.5rem; }
             .hero-photo { width: 80px; height: 80px; margin-bottom: 1.5rem; }
@@ -418,7 +421,6 @@
 
 <nav class="nav">
     <div class="nav-inner">
-        <span class="nav-name">Heramb Patkar</span>
         <div class="nav-links">
             <a href="#experience">Experience</a>
             <a href="#education">Education</a>
@@ -444,9 +446,9 @@
     <h1 class="reveal delay-1">Heramb S. Patkar</h1>
     <div class="hero-rule reveal delay-2"></div>
     <p class="hero-subtitle reveal delay-2">MS Finance, Purdue University &mdash; Daniels School of Business</p>
-    <p class="hero-desc reveal delay-3">Equity research and financial modeling across Autos, Pharma, and Hospitality. Translating quantitative analysis and industry trends into actionable investment insights.</p>
+    <p class="hero-desc reveal delay-3">Equity research and financial modeling across Autos, Pharma, and Hospitality&mdash;translating quantitative analysis and sector-level insight into institutional-grade investment recommendations.</p>
     <div class="hero-actions reveal delay-3">
-        <a class="btn btn-dark" href="mailto:hpatkar@purdue.edu">Get in Touch</a>
+        <a class="btn btn-dark" href="mailto:hpatkar@purdue.edu">Email</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
         <a class="btn btn-ghost" href="https://github.com/HPATKAR" target="_blank">GitHub</a>
     </div>
@@ -507,7 +509,7 @@
 
     <div class="exp-item reveal">
         <div>
-            <p class="exp-company">Divgi TorqTransfer</p>
+            <p class="exp-company">Divgi TorqTransfer Systems</p>
             <p class="exp-location">Sirsi, India</p>
             <p class="exp-dates">Jul 2023 &ndash; Dec 2023</p>
         </div>
@@ -525,11 +527,16 @@
     <p class="section-label reveal">Education</p>
     <div class="edu-grid">
         <div class="edu-card reveal">
-            <p class="edu-school">Purdue University</p>
-            <p class="edu-campus">Daniels School of Business</p>
+            <div class="edu-logo-row">
+                <img class="edu-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Purdue_Boilermakers_logo.svg" alt="Purdue">
+                <div>
+                    <p class="edu-school">Purdue University</p>
+                    <p class="edu-campus">Daniels School of Business</p>
+                </div>
+            </div>
             <div class="edu-divider"></div>
             <p class="edu-degree">Master of Science in Finance</p>
-            <p class="edu-year">2026</p>
+            <p class="edu-year">Expected May 2026</p>
             <div class="edu-tags">
                 <span class="edu-tag">Financial Modelling</span>
                 <span class="edu-tag">Investments</span>
@@ -537,11 +544,16 @@
             </div>
         </div>
         <div class="edu-card reveal delay-1">
-            <p class="edu-school">BITS Pilani</p>
-            <p class="edu-campus">Hyderabad Campus</p>
+            <div class="edu-logo-row">
+                <img class="edu-logo" src="https://upload.wikimedia.org/wikipedia/en/d/d3/BITS_Pilani-Logo.svg" alt="BITS Pilani">
+                <div>
+                    <p class="edu-school">BITS Pilani</p>
+                    <p class="edu-campus">Hyderabad Campus</p>
+                </div>
+            </div>
             <div class="edu-divider"></div>
             <p class="edu-degree">B.E. Mechanical Engineering</p>
-            <p class="edu-year">2024</p>
+            <p class="edu-year">May 2024</p>
             <div class="edu-tags">
                 <span class="edu-tag">Optimization</span>
                 <span class="edu-tag">Manufacturing</span>
@@ -559,7 +571,7 @@
         <p class="pub-title">Design, Fabrication, and Validation of a Low-Cost Stereotaxic Device for Brain Research in Rodents</p>
         <p class="pub-authors">Avinash Wadkar &middot; <strong>Heramb Patkar</strong> &middot; Srinivasa Prasad Kommajosyula</p>
         <a class="pub-link" href="https://www.ias.ac.in/article/fulltext/boms/048/0028" target="_blank">
-            Read Paper
+            View Publication
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 11L11 5m0 0H6m5 0v5"/></svg>
         </a>
     </div>
@@ -608,14 +620,14 @@
 <!-- ═══ Contact ═══ -->
 <footer class="footer" id="contact">
     <p class="footer-label reveal">Contact</p>
-    <h2 class="reveal delay-1">Let's Connect</h2>
-    <p class="footer-sub reveal delay-2">Open to opportunities in equity research, investment analysis, and financial modeling.</p>
+    <h2 class="reveal delay-1">Contact</h2>
+    <p class="footer-sub reveal delay-2">Available for opportunities in equity research, investment analysis, and financial modeling.</p>
     <div class="footer-links reveal delay-3">
         <a class="footer-link" href="mailto:hpatkar@purdue.edu">hpatkar@purdue.edu</a>
         <a class="footer-link" href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
         <a class="footer-link" href="https://github.com/HPATKAR" target="_blank">GitHub</a>
     </div>
-    <p class="footer-copy">&copy; 2025 Heramb S. Patkar &middot; West Lafayette, IN</p>
+    <p class="footer-copy">&copy; 2026 Heramb S. Patkar &middot; West Lafayette, IN</p>
 </footer>
 
 <script>
