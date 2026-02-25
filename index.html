@@ -71,8 +71,20 @@
         [data-theme="dark"] .hero-photo img {
             filter: grayscale(12%) contrast(1.02) brightness(0.95);
         }
-        [data-theme="dark"] .edu-logo.logo-purdue {
-            filter: invert(1) brightness(1.8) sepia(0.3) saturate(0.6) hue-rotate(10deg);
+        .purdue-logo-wrap {
+            width: 36px; height: 36px; flex-shrink: 0;
+            position: relative;
+        }
+        .purdue-logo-wrap img {
+            width: 100%; height: 100%; object-fit: contain;
+        }
+        [data-theme="dark"] .purdue-logo-wrap {
+            background: #CFB991;
+            border-radius: 4px;
+            padding: 4px;
+        }
+        [data-theme="dark"] .purdue-logo-wrap img {
+            filter: none;
         }
         [data-theme="dark"] .edu-logo.logo-bits {
             filter: brightness(1.3) contrast(0.9);
@@ -608,7 +620,9 @@
     <div class="edu-grid">
         <div class="edu-card reveal">
             <div class="edu-logo-row">
-                <img class="edu-logo logo-purdue" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Purdue_Boilermakers_logo.svg" alt="Purdue">
+                <div class="purdue-logo-wrap">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Purdue_Boilermakers_logo.svg" alt="Purdue">
+                </div>
                 <div>
                     <p class="edu-school">Purdue University</p>
                     <p class="edu-campus">Daniels School of Business</p>
