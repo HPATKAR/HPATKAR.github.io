@@ -71,8 +71,11 @@
         [data-theme="dark"] .hero-photo img {
             filter: grayscale(12%) contrast(1.02) brightness(0.95);
         }
-        [data-theme="dark"] .edu-logo {
-            filter: brightness(0) invert(1) opacity(0.7);
+        [data-theme="dark"] .edu-logo.logo-purdue {
+            filter: brightness(0) invert(1);
+        }
+        [data-theme="dark"] .edu-logo.logo-bits {
+            filter: brightness(1.3) contrast(0.9);
         }
 
         html { font-size: 16px; scroll-behavior: smooth; }
@@ -605,7 +608,7 @@
     <div class="edu-grid">
         <div class="edu-card reveal">
             <div class="edu-logo-row">
-                <img class="edu-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Purdue_Boilermakers_logo.svg" alt="Purdue">
+                <img class="edu-logo logo-purdue" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Purdue_Boilermakers_logo.svg" alt="Purdue">
                 <div>
                     <p class="edu-school">Purdue University</p>
                     <p class="edu-campus">Daniels School of Business</p>
@@ -622,7 +625,7 @@
         </div>
         <div class="edu-card reveal delay-1">
             <div class="edu-logo-row">
-                <img class="edu-logo" src="https://upload.wikimedia.org/wikipedia/en/d/d3/BITS_Pilani-Logo.svg" alt="BITS Pilani">
+                <img class="edu-logo logo-bits" src="https://upload.wikimedia.org/wikipedia/en/d/d3/BITS_Pilani-Logo.svg" alt="BITS Pilani">
                 <div>
                     <p class="edu-school">BITS Pilani</p>
                     <p class="edu-campus">Hyderabad Campus</p>
