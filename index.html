@@ -233,6 +233,16 @@
             padding: 2.2rem 0;
         }
         .exp-item + .exp-item { border-top: 1px solid var(--rule-light); }
+        .exp-logo-row {
+            display: flex; align-items: center; gap: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+        .exp-logo {
+            width: 28px; height: 28px;
+            object-fit: contain; flex-shrink: 0;
+            border-radius: 4px;
+        }
+        [data-theme="dark"] .exp-logo { filter: brightness(1.15) contrast(0.9); }
         .exp-company {
             font-family: var(--serif);
             font-size: 1.05rem; font-weight: 600;
@@ -250,7 +260,16 @@
         .exp-role {
             font-size: 0.85rem; font-weight: 600;
             color: var(--ink);
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.3rem;
+        }
+        .exp-role-second {
+            margin-top: 1.2rem; padding-top: 1rem;
+            border-top: 1px solid var(--rule-light);
+            margin-bottom: 0.3rem;
+        }
+        .exp-sub-dates {
+            font-size: 0.65rem; color: var(--ink-5);
+            margin-bottom: 0.55rem; letter-spacing: 0.02em;
         }
         .exp-bullets { list-style: none; }
         .exp-bullets li {
@@ -383,6 +402,24 @@
             line-height: 1.5;
         }
 
+        /* ── Projects ── */
+        .proj-item {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 3rem;
+            padding: 2.2rem 0;
+        }
+        .proj-item + .proj-item { border-top: 1px solid var(--rule-light); }
+        .proj-name {
+            font-family: var(--serif);
+            font-size: 1.05rem; font-weight: 600;
+            color: var(--ink);
+        }
+        .proj-context {
+            font-size: 0.7rem; color: var(--ink-4);
+            margin-top: 0.3rem; line-height: 1.5;
+        }
+
         /* ── Footer ── */
         .footer {
             max-width: var(--max-w); margin: 0 auto;
@@ -472,6 +509,10 @@
             .pub-title { font-size: 1.15rem; }
 
             .skills-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .proj-item {
+                grid-template-columns: 1fr;
+                gap: 0.4rem; padding: 1.5rem 0;
+            }
 
             .footer { padding: 3.5rem var(--px) 2.5rem; }
             .footer h2 { font-size: 1.6rem; }
@@ -507,6 +548,7 @@
     <div class="nav-inner">
         <div class="nav-links">
             <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
             <a href="#education">Education</a>
             <a href="#publication">Publication</a>
             <a href="#skills">Skills</a>
@@ -521,6 +563,7 @@
 
 <nav class="m-nav">
     <a href="#experience">Work</a>
+    <a href="#projects">Projects</a>
     <a href="#education">Edu</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
@@ -533,7 +576,7 @@
             <p class="hero-overline reveal">Equity Research &middot; Financial Modeling &middot; Investment Analysis</p>
             <h1 class="reveal delay-1">Heramb S. Patkar</h1>
             <p class="hero-subtitle reveal delay-2">MS Finance &middot; Purdue University, Daniels School of Business</p>
-            <p class="hero-desc reveal delay-2">NISM-certified research professional with institutional equity research experience spanning Autos, Pharma, and Hospitality. Background in DCF and comparable valuation, IPO analysis, and earnings-driven stock pitching for HNI and institutional clients. Currently consulting on Series&nbsp;A fundraising strategy and investor modeling.</p>
+            <p class="hero-desc reveal delay-2">NISM-certified research professional with institutional equity research experience spanning Autos, Pharma, and Hospitality. Background in DCF and comparable valuation, IPO analysis, and earnings-driven stock pitching. Currently consulting on Series&nbsp;A fundraising strategy at Fino Advisors, screening early-stage deal flows at the Student Managed Venture Fund, and recently completed a Fortune 100 stock-compensation forecasting externship at Equity Methods.</p>
             <div class="hero-actions reveal delay-3">
                 <a class="btn btn-dark" href="mailto:hpatkar@purdue.edu">Email</a>
                 <a class="btn btn-ghost" href="https://www.linkedin.com/in/heramb-patkar/" target="_blank">LinkedIn</a>
@@ -552,7 +595,10 @@
 
     <div class="exp-item reveal">
         <div>
-            <p class="exp-company">Fino Advisors LLC</p>
+            <div class="exp-logo-row">
+                <img class="exp-logo" src="https://images.squarespace-cdn.com/content/v1/6048fc46633da44d2fda5b17/1615397045260-MUKMU6B3DPUS9YVTV8QW/FINO_LOGO.png" alt="Fino Advisors">
+                <p class="exp-company">Fino Advisors LLC</p>
+            </div>
             <p class="exp-location">Houston, TX</p>
             <p class="exp-dates">Jan 2026 &ndash; Present</p>
         </div>
@@ -568,40 +614,72 @@
 
     <div class="exp-item reveal">
         <div>
-            <p class="exp-company">Axis Securities Ltd</p>
+            <div class="exp-logo-row">
+                <img class="exp-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Purdue_Boilermakers_logo.svg" alt="Purdue">
+                <p class="exp-company">Student Managed Venture Fund</p>
+            </div>
+            <p class="exp-location">West Lafayette, IN</p>
+            <p class="exp-dates">Jan 2026 &ndash; Present</p>
+        </div>
+        <div>
+            <p class="exp-role">Analyst</p>
+            <ul class="exp-bullets">
+                <li>Build and refine financial models to evaluate early-stage deal flows each cycle, screening for business model viability, unit economics, and operational red flags across Purdue-sourced startups.</li>
+                <li>Present investment recommendations to professional VC panels, structuring due diligence findings into decision-ready memos and reducing diligence cycle time through systematic early-stage risk filtering.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="exp-item reveal">
+        <div>
+            <div class="exp-logo-row">
+                <img class="exp-logo" src="https://www.equitymethods.com/wp-content/themes/equity-methods/images/r-logo.png" alt="Equity Methods">
+                <p class="exp-company">Equity Methods</p>
+            </div>
+            <p class="exp-location">Champaign, IL</p>
+            <p class="exp-dates">Mar 2026</p>
+        </div>
+        <div>
+            <p class="exp-role">Student Extern</p>
+            <ul class="exp-bullets">
+                <li>Used SAS to forecast stock compensation expenses for a Fortune 100 company during a two-day externship, refining forecasting techniques, improving projection accuracy, and stress-testing assumptions across grant types.</li>
+                <li>Developed client-ready decks with graphical disclosures and CAP calculations for proxy filings; applied Pay vs. Performance (PVP) analysis to align exec compensation with shareholder returns and business outcomes.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="exp-item reveal">
+        <div>
+            <div class="exp-logo-row">
+                <img class="exp-logo" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Axis_Bank_logo.svg" alt="Axis Securities">
+                <p class="exp-company">Axis Securities Ltd</p>
+            </div>
             <p class="exp-location">Mumbai, India</p>
-            <p class="exp-dates">Sep 2024 &ndash; Apr 2025</p>
+            <p class="exp-dates">Jul 2024 &ndash; Apr 2025</p>
         </div>
         <div>
             <p class="exp-role">Research Associate</p>
+            <p class="exp-sub-dates">Sep 2024 &ndash; Apr 2025</p>
             <ul class="exp-bullets">
-                <li>Partnered with the lead equity research analyst on Auto &amp; Auto Ancillary coverage, delivering institutional-grade research for HNIs, fund managers, and institutional clients.</li>
-                <li>Built and maintained detailed cash flow/DCF models for 14 listed companies, contributed to IPO notes, quarterly earnings updates, and industry volume outlooks.</li>
-                <li>Developed a dynamic industry tracker (production, sales, inventory) across segments using official data sources.</li>
-                <li>Attended earnings calls and engaged with senior management to extract strategic insights on pricing, margins, capex, and tariffs.</li>
-                <li>Pitched stock ideas and thematic plays to the PMS team (AUM ~$600Mn) and Head of Research.</li>
+                <li>Led Auto &amp; Auto Ancillary equity research under the lead analyst, building financial models for 14 stocks, delivering IPO notes, earnings updates, and industry outlooks to family offices and fund managers.</li>
+                <li>Owned a dynamic industry tracker (production, sales, inventory) across segments and engine classes for the market.</li>
+                <li>Pitched stock ideas and thematic plays to the PMS team (AUM ~$1&nbsp;Bn) and Head of Research, engaging senior management on pricing, margins, capex, and tariffs.</li>
+            </ul>
+            <p class="exp-role exp-role-second">Equity Research Intern</p>
+            <p class="exp-sub-dates">Jul 2024 &ndash; Aug 2024</p>
+            <ul class="exp-bullets">
+                <li>Supported coverage across Pharma and Hospitality (13 stocks), contributing to thematic research, initiating coverage, and management interactions.</li>
+                <li>Converted to full-time; secured a recommendation from the Head of Research.</li>
             </ul>
         </div>
     </div>
 
     <div class="exp-item reveal">
         <div>
-            <p class="exp-company">Axis Securities Ltd</p>
-            <p class="exp-location">Mumbai, India</p>
-            <p class="exp-dates">Jul 2024 &ndash; Aug 2024</p>
-        </div>
-        <div>
-            <p class="exp-role">Equity Research Intern</p>
-            <ul class="exp-bullets">
-                <li>Supported coverage across Pharma and Hospitality (13 stocks), contributing to thematic research and company updates.</li>
-                <li>Assisted in initiating coverage work and management interactions to extract key drivers, risks, and catalysts.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="exp-item reveal">
-        <div>
-            <p class="exp-company">Divgi TorqTransfer Systems</p>
+            <div class="exp-logo-row">
+                <img class="exp-logo" src="https://divgi-tts.com/wp-content/uploads/2022/10/logo-2a1.png" alt="Divgi TorqTransfer">
+                <p class="exp-company">Divgi TorqTransfer Systems</p>
+            </div>
             <p class="exp-location">Sirsi, India</p>
             <p class="exp-dates">Jul 2023 &ndash; Dec 2023</p>
         </div>
@@ -609,6 +687,47 @@
             <p class="exp-role">Manufacturing Engineering Intern</p>
             <ul class="exp-bullets">
                 <li>Implemented Lean initiatives and led a 10-intern value-stream mapping effort to identify bottlenecks, cut waste, and improve countershaft-line efficiency by ~2% over two quarters.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Projects ═══ -->
+<section class="section" id="projects">
+    <p class="section-label reveal">Projects</p>
+
+    <div class="proj-item reveal">
+        <div>
+            <p class="proj-name">JGB Repricing Framework</p>
+            <p class="proj-context">Purdue University &middot; Daniels School of Business<br>MGMT 69000-119 &middot; Prof. X. Zhang</p>
+        </div>
+        <div>
+            <ul class="exp-bullets">
+                <li>Built a quant dashboard for JGB repricing as the BOJ exits YCC, using regime filters (MS/HMM/GARCH), yield PCA, DCC spillovers, and cross-asset transfer entropy to auto-generate trade signals.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="proj-item reveal">
+        <div>
+            <p class="proj-name">Eli Lilly &ndash; Madrigal M&amp;A Case</p>
+            <p class="proj-context">IU Bloomington MSF Case Competition</p>
+        </div>
+        <div>
+            <ul class="exp-bullets">
+                <li>Built a patient-based DCF for Lilly&rsquo;s acquisition of Madrigal (~$10.4&ndash;22B), quantified synergies against pharma M&amp;A precedents, and recommended a $640&ndash;809/share offer.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="proj-item reveal">
+        <div>
+            <p class="proj-name">PepsiCo &ndash; Vita Coco Acquisition</p>
+            <p class="proj-context">Purdue University &middot; Daniels School of Business<br>MGMT 64500 &middot; Prof. S. Chernenko</p>
+        </div>
+        <div>
+            <ul class="exp-bullets">
+                <li>Built a DCF and EBIT exit-multiple valuation, quantified revenue and cost synergies, and structured a $3.9&ndash;4.2B all-cash bid delivering 1.5% EPS accretion for a proposed acquisition of Vita Coco by PepsiCo.</li>
             </ul>
         </div>
     </div>
@@ -688,6 +807,8 @@
             <div class="skills-list">
                 <span>Python</span>
                 <span>Excel (Advanced)</span>
+                <span>SAS</span>
+                <span>Claude CLI</span>
                 <span>Autodesk Suite</span>
             </div>
         </div>
